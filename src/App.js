@@ -1,12 +1,19 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import { generaterRandomNumber } from "./random";
 
 function App() {
-  console.log(generaterRandomNumber());
+  // console.log(generaterRandomNumber());
+  const [randomNumber, setRandomNumber] = useState(generaterRandomNumber);
+
+  useEffect(() => {
+    console.log(randomNumber);
+  }, []);
+
   return (
     <div className="App">
       <h1>숫자 야구 게임</h1>
-      <header className="header">_ _ _ _</header>
+      <header className="header">{randomNumber}</header>
       <section>
         <input />
         <button>맞춰보기</button>
