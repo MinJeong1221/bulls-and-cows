@@ -18,6 +18,24 @@ function App() {
   };
   const handleSubmitClick = (e) => {
     const answerArray = answer.split("").map((item) => Number(item));
+
+    if (answer.some((item) => isNaN(Number))) {
+      alert("숫자만 입력해주세요");
+      return;
+    }
+    if (answer.length !== 4) {
+      alert("4자리 숫자만 입력해주세요");
+      return;
+    }
+    const isDuplicate = answer.some((number) => {
+      return answer.indexOf(number) !== answer.lastIndexOf(number);
+    });
+
+    if (isDuplicate) {
+      alert("입력 값에 중복이 있어요");
+      return;
+    }
+
     const { strike, ball } = randomNumber.reduce(
       (prev, cur, index) => {
         if (answerArray[index] === cur) {
