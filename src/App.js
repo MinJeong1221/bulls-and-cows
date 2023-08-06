@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { generaterRandomNumber } from "./random";
+import Logs from "./compontes/Logs";
 
 function App() {
   // console.log(generaterRandomNumber());
@@ -19,16 +20,16 @@ function App() {
   const handleSubmitClick = (e) => {
     const answerArray = answer.split("").map((item) => Number(item));
 
-    if (answer.some((item) => isNaN(Number))) {
+    if (answerArray.some((number) => isNaN(number))) {
       alert("숫자만 입력해주세요");
       return;
     }
-    if (answer.length !== 4) {
+    if (answerArray.length !== 4) {
       alert("4자리 숫자만 입력해주세요");
       return;
     }
-    const isDuplicate = answer.some((number) => {
-      return answer.indexOf(number) !== answer.lastIndexOf(number);
+    const isDuplicate = answerArray.some((number) => {
+      return answerArray.indexOf(number) !== answerArray.lastIndexOf(number);
     });
 
     if (isDuplicate) {
@@ -89,12 +90,7 @@ function App() {
           <button onClick={handleSubmitClick}>맞춰보기</button>
         )}
       </section>
-      <h2>기록</h2>
-      <ol>
-        {logs.map((log, index) => {
-          return <li key={`${log}_${index}`}>{log}</li>;
-        })}
-      </ol>
+      <Logs logs={logs} />
     </div>
   );
 }
